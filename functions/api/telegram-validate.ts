@@ -1,13 +1,8 @@
-// Transforms Telegram.WebApp.initData string into object
-type TransformInitData = {
-  [k: string]: string;
-};
-
-function transformInitData(initData: string): TransformInitData {
+function transformInitData(initData: string): Record<string, string> {
   return Object.fromEntries(new URLSearchParams(initData));
 }
 
-async function generateHex(data: TransformInitData, botToken: string): Promise<string> {
+async function generateHex(data: Record<string, string>, botToken: string): Promise<string> {
   const encoder = new TextEncoder();
   const checkString = await Object.keys(data)
     .filter((key) => key !== 'hash')
